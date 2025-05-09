@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RedFox Script Hub</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>🔥 RedFox Script Hub 🔥</h1>
-  <p>Click any script to copy its raw loadstring!</p>
+  <div class="container">
+    <h1>🔥 RedFox Script Hub 🔥</h1>
+    <p>Click any script to copy its raw <code>loadstring</code></p>
 
-  <div class="script-list">
-    <button onclick="copyLink('autofarm')">AutoFarm</button>
-    <button onclick="copyLink('esp')">ESP</button>
-    <button onclick="copyLink('fly')">Fly</button>
+    <div class="script-grid">
+      <button onclick="copyLink('autofarm')">AutoFarm</button>
+      <button onclick="copyLink('esp')">ESP</button>
+      <button onclick="copyLink('fly')">Fly</button>
+    </div>
+
+    <p id="copied-msg">Copied to clipboard!</p>
   </div>
 
   <script>
     function copyLink(name) {
-      const url = `https://raw.githubusercontent.com/YOUR_USERNAME/RedFox-Scripts/main/scripts/${name}.lua`;
-      const loadstring = `loadstring(game:HttpGet("${url}"))()`;
-      navigator.clipboard.writeText(loadstring);
-      alert("Copied loadstring for " + name);
+      const url = `https://raw.githubusercontent.com/Syr0nix/RedFox-Scripts/main/scripts/${name}.lua`;
+      const loadstringCode = `loadstring(game:HttpGet("${url}"))()`;
+      navigator.clipboard.writeText(loadstringCode);
+      const msg = document.getElementById("copied-msg");
+      msg.style.opacity = 1;
+      setTimeout(() => (msg.style.opacity = 0), 2000);
     }
   </script>
 </body>
 </html>
-
