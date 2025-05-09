@@ -8,38 +8,38 @@
 </head>
 <body>
   <div class="container">
+    <h1>🔥 RedFox Script Hub</h1>
+    <p>Select a script to get its loadstring:</p>
 
-    <div class="header">
-      <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="logo">
-      <h1><span class="red">RedFox</span> Script Hub</h1>
+    <div class="script-list">
+      <button onclick="showScript('AutoFarm')">AutoFarm</button>
+      <button onclick="showScript('ESP')">ESP</button>
+      <button onclick="showScript('Fly')">Fly</button>
     </div>
 
-    <div class="discord-box">
-      <p><strong>3,189+ Members</strong></p>
-      <a class="discord-btn" href="https://discord.gg/yourserver" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png"> Join
-      </a>
-    </div>
-
-    <div class="script-card">
+    <div id="script-card" class="script-card hidden">
       <div class="script-header">
-        <p class="note">🔒 The key for this script is in our Discord (#key)</p>
-        <h2>AutoFarm Script</h2>
-      </div>
-
-      <div class="code-box">
-        <code id="code">loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/RedFox-Scripts/main/scripts/autofarm.lua"))()</code>
+        <h2 id="script-title">Script</h2>
         <button class="copy-btn" onclick="copyScript()">📋</button>
       </div>
+      <div class="code-box">
+        <code id="script-code"></code>
+      </div>
     </div>
-
   </div>
 
   <script>
+    function showScript(name) {
+      const code = `loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/RedFox-Scripts/main/scripts/${name.toLowerCase()}.lua"))()`;
+      document.getElementById("script-code").textContent = code;
+      document.getElementById("script-title").textContent = `${name} Script`;
+      document.getElementById("script-card").classList.remove("hidden");
+    }
+
     function copyScript() {
-      const code = document.getElementById("code").innerText;
+      const code = document.getElementById("script-code").textContent;
       navigator.clipboard.writeText(code);
-      alert("Copied script to clipboard!");
+      alert("Copied to clipboard!");
     }
   </script>
 </body>
