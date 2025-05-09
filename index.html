@@ -1,1 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RedFox Script Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>🔥 RedFox Script Hub 🔥</h1>
+  <p>Click any script to copy its raw loadstring!</p>
+
+  <div class="script-list">
+    <button onclick="copyLink('autofarm')">AutoFarm</button>
+    <button onclick="copyLink('esp')">ESP</button>
+    <button onclick="copyLink('fly')">Fly</button>
+  </div>
+
+  <script>
+    function copyLink(name) {
+      const url = `https://raw.githubusercontent.com/YOUR_USERNAME/RedFox-Scripts/main/scripts/${name}.lua`;
+      const loadstring = `loadstring(game:HttpGet("${url}"))()`;
+      navigator.clipboard.writeText(loadstring);
+      alert("Copied loadstring for " + name);
+    }
+  </script>
+</body>
+</html>
 
