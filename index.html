@@ -4,30 +4,56 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RedFox Script Hub</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>🔥 RedFox Script Hub</h1>
-    <p>Select a script to get its loadstring:</p>
+  <div class="wrapper">
 
-    <div class="script-list">
+    <div class="header">
+      <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="RedFox Logo" class="logo">
+      <h1><span class="gradient-text">RedFox Script Hub</span></h1>
+    </div>
+
+    <div class="discord-box">
+      <p>🔥 <strong>3,189+ Members</strong></p>
+      <a class="discord-btn" href="https://discord.gg/YOURSERVER" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png"> Join
+      </a>
+    </div>
+
+    <div class="script-selector">
       <button onclick="showScript('AutoFarm')">AutoFarm</button>
       <button onclick="showScript('ESP')">ESP</button>
       <button onclick="showScript('Fly')">Fly</button>
     </div>
 
     <div id="script-card" class="script-card hidden">
-      <div class="script-header">
-        <h2 id="script-title">Script</h2>
+      <div class="script-note">🔒 The key for this script is in our Discord (#key)</div>
+      <h2 id="script-title">Script</h2>
+      <div class="code-box">
+        <code id="script-code">loadstring(game:HttpGet("https://..."))()</code>
         <button class="copy-btn" onclick="copyScript()">📋</button>
       </div>
-      <div class="code-box">
-        <code id="script-code"></code>
-      </div>
     </div>
+
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    function showScript(name) {
+      const code = `loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/RedFox-Scripts/main/scripts/${name.toLowerCase()}.lua"))()`;
+      document.getElementById("script-code").textContent = code;
+      document.getElementById("script-title").textContent = name + " Script";
+      const card = document.getElementById("script-card");
+      card.classList.remove("hidden");
+      card.classList.add("show");
+    }
+
+    function copyScript() {
+      const code = document.getElementById("script-code").textContent;
+      navigator.clipboard.writeText(code);
+      alert("Copied!");
+    }
+  </script>
 </body>
 </html>
