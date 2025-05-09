@@ -5,56 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RedFox Script Hub</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" class="logo">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="wrapper">
+  <div class="background-glow"></div>
 
-    <div class="header">
-      <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="RedFox Logo" class="logo">
-      <h1><span class="gradient-text">RedFox Script Hub</span></h1>
-    </div>
+  <header class="site-header">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="logo" />
+    <h1 class="site-title">Red<span>Fox</span> Script Hub</h1>
+    <p class="subtitle">🔥 Roblox Scripts — Clean. Fast. Dangerous.</p>
+  </header>
 
-    <div class="discord-box">
-      <p>🔥 <strong>3,189+ Members</strong></p>
-      <a class="discord-btn" href="https://discord.gg/YOURSERVER" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png"> Join
-      </a>
-    </div>
+  <section class="script-section">
+    <div class="script-grid">
+      <div class="script-card" onclick="showScript('AutoFarm', 'https://raw.githubusercontent.com/Syr0nix/RedFox-Scripts/main/scripts/autofarm.lua')">
+        <h2>AutoFarm</h2>
+        <p>Automate your grind</p>
+      </div>
 
-    <div class="script-selector">
-      <button onclick="showScript('AutoFarm')">AutoFarm</button>
-      <button onclick="showScript('ESP')">ESP</button>
-      <button onclick="showScript('Fly')">Fly</button>
-    </div>
+      <div class="script-card" onclick="showScript('ESP', 'https://raw.githubusercontent.com/Syr0nix/RedFox-Scripts/main/scripts/esp.lua')">
+        <h2>ESP</h2>
+        <p>See through walls, RedFox style</p>
+      </div>
 
-    <div id="script-card" class="script-card hidden">
-      <div class="script-note">🔒 The key for this script is in our Discord (#key)</div>
-      <h2 id="script-title">Script</h2>
-      <div class="code-box">
-        <code id="script-code">loadstring(game:HttpGet("https://..."))()</code>
-        <button class="copy-btn" onclick="copyScript()">📋</button>
+      <div class="script-card" onclick="showScript('Fly', 'https://raw.githubusercontent.com/Syr0nix/RedFox-Scripts/main/scripts/fly.lua')">
+        <h2>Fly</h2>
+        <p>Lift off and stay airborne</p>
       </div>
     </div>
+  </section>
 
-  </div>
+  <section class="viewer hidden" id="viewer">
+    <div class="viewer-content">
+      <p class="viewer-title" id="scriptName">Selected Script</p>
+      <div class="code-box">
+        <code id="codeOutput">...</code>
+        <button onclick="copyScript()" class="copy-button">📋</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>RedFox Scripts • <a href="https://discord.gg/YOURINVITE">Join Discord</a></p>
+  </footer>
 
   <script>
-    function showScript(name) {
-      const code = `loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/RedFox-Scripts/main/scripts/${name.toLowerCase()}.lua"))()`;
-      document.getElementById("script-code").textContent = code;
-      document.getElementById("script-title").textContent = name + " Script";
-      const card = document.getElementById("script-card");
-      card.classList.remove("hidden");
-      card.classList.add("show");
+    function showScript(name, url) {
+      const full = `loadstring(game:HttpGet("${url}"))()`;
+      document.getElementById("codeOutput").textContent = full;
+      document.getElementById("scriptName").textContent = name + " Script";
+      document.getElementById("viewer").classList.remove("hidden");
     }
 
     function copyScript() {
-      const code = document.getElementById("script-code").textContent;
+      const code = document.getElementById("codeOutput").textContent;
       navigator.clipboard.writeText(code);
-      alert("Copied!");
+      alert("Copied to clipboard!");
     }
   </script>
 </body>
