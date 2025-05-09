@@ -8,26 +8,38 @@
 </head>
 <body>
   <div class="container">
-    <h1>🔥 RedFox Script Hub 🔥</h1>
-    <p>Click any script to copy its raw <code>loadstring</code></p>
 
-    <div class="script-grid">
-      <button onclick="copyLink('autofarm')">AutoFarm</button>
-      <button onclick="copyLink('esp')">ESP</button>
-      <button onclick="copyLink('fly')">Fly</button>
+    <div class="header">
+      <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="logo">
+      <h1><span class="red">RedFox</span> Script Hub</h1>
     </div>
 
-    <p id="copied-msg">Copied to clipboard!</p>
+    <div class="discord-box">
+      <p><strong>3,189+ Members</strong></p>
+      <a class="discord-btn" href="https://discord.gg/yourserver" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png"> Join
+      </a>
+    </div>
+
+    <div class="script-card">
+      <div class="script-header">
+        <p class="note">🔒 The key for this script is in our Discord (#key)</p>
+        <h2>AutoFarm Script</h2>
+      </div>
+
+      <div class="code-box">
+        <code id="code">loadstring(game:HttpGet("https://raw.githubusercontent.com/Syr0nix/RedFox-Scripts/main/scripts/autofarm.lua"))()</code>
+        <button class="copy-btn" onclick="copyScript()">📋</button>
+      </div>
+    </div>
+
   </div>
 
   <script>
-    function copyLink(name) {
-      const url = `https://raw.githubusercontent.com/Syr0nix/RedFox-Scripts/main/scripts/${name}.lua`;
-      const loadstringCode = `loadstring(game:HttpGet("${url}"))()`;
-      navigator.clipboard.writeText(loadstringCode);
-      const msg = document.getElementById("copied-msg");
-      msg.style.opacity = 1;
-      setTimeout(() => (msg.style.opacity = 0), 2000);
+    function copyScript() {
+      const code = document.getElementById("code").innerText;
+      navigator.clipboard.writeText(code);
+      alert("Copied script to clipboard!");
     }
   </script>
 </body>
