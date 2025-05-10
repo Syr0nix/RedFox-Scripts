@@ -67,9 +67,35 @@
       margin-top: 10px;
     }
 
-    .script-section {
-      background: #0a0a0a;
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      background: #111;
+      border-bottom: 2px solid red;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 16px 24px;
+      font-size: 1rem;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .tab-btn.active {
+      color: #ff4444;
+      border-bottom: 2px solid red;
+    }
+
+    .tab-content {
+      display: none;
       padding: 40px 20px;
+    }
+
+    .tab-content:not(.hidden) {
+      display: block;
     }
 
     .script-grid {
@@ -110,7 +136,6 @@
       background: #0a0a0a;
       padding: 40px 20px;
       text-align: center;
-      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .viewer.hidden {
@@ -157,6 +182,18 @@
       box-shadow: 0 0 20px rgba(255, 75, 100, 1);
     }
 
+    textarea {
+      width: 90%;
+      height: 200px;
+      background: #111;
+      color: #fff;
+      border: 1px solid red;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: monospace;
+      resize: vertical;
+    }
+
     .footer {
       text-align: center;
       padding: 30px;
@@ -184,27 +221,28 @@
     <p class="subtitle">🔥 Roblox Scripts — Clean. Fast. Dangerous.</p>
   </header>
 
-  <section class="script-section">
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="openTab('scripts', event)">Scripts</button>
+    <button class="tab-btn" onclick="openTab('executor', event)">Executor</button>
+    <button class="tab-btn" onclick="openTab('obfuscator', event)">Luau Obfuscator</button>
+  </div>
+
+  <section class="tab-content" id="tab-scripts">
     <div class="script-grid">
-      <div class="script-card" onclick="showScript('AutoFarm', 'Comeing Soon!')">
+      <div class="script-card" onclick="showScript('AutoFarm', 'Coming Soon!')">
         <h2>AutoFarm</h2>
         <p>Automate your grind</p>
       </div>
-
       <div class="script-card" onclick="showScript('Server Bowser', 'https://raw.githubusercontent.com/Syr0nix/RedFoxServerBowser/refs/heads/main/Mainlua')">
         <h2>Server Bowser</h2>
         <p>See all Servers and join, RedFox style</p>
       </div>
-
-      <div class="script-card" onclick="showScript('Fly', 'Comeing Soon!')">
+      <div class="script-card" onclick="showScript('Fly', 'Coming Soon!')">
         <h2>Fly</h2>
         <p>Lift off and stay airborne</p>
       </div>
     </div>
-  </section>
-
-  <section class="viewer hidden" id="viewer">
-    <div class="viewer-content">
+    <div class="viewer hidden" id="viewer">
       <p class="viewer-title" id="scriptName">Selected Script</p>
       <div class="code-box">
         <code id="codeOutput">...</code>
@@ -213,12 +251,31 @@
     </div>
   </section>
 
- <footer class="footer">
-  <p>RedFox Scripts • <a href="https://discord.gg/YOURINVITE">Join Discord</a></p>
-  <p>© 2025 Syr0nix Studio's™. All rights reserved.</p>
-</footer>
+  <section class="tab-content hidden" id="tab-executor">
+    <h2>Executor</h2>
+    <p style="color: #aaa;">Paste and run your custom script here:</p>
+    <textarea placeholder="Enter your script here..."></textarea><br><br>
+    <button style="padding: 10px 20px; background: red; color: white; border: none; border-radius: 8px;">Execute</button>
+  </section>
+
+  <section class="tab-content hidden" id="tab-obfuscator">
+    <h2>Luau Obfuscator</h2>
+    <p style="color: #aaa;">Coming Soon</p>
+  </section>
+
+  <footer class="footer">
+    <p>RedFox Scripts • <a href="https://discord.gg/YOURINVITE">Join Discord</a></p>
+    <p>© 2025 Syr0nix Studio's™. All rights reserved.</p>
+  </footer>
 
   <script>
+    function openTab(tabId, event) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+      event.currentTarget.classList.add('active');
+    }
+
     function showScript(name, url) {
       const full = `loadstring(game:HttpGet("${url}"))()`;
       document.getElementById("codeOutput").textContent = full;
