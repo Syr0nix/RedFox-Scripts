@@ -4,27 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RedFox Script Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
   <style>
     html, body {
       margin: 0;
-      padding: 0;
-      height: 100%;
       font-family: 'Inter', sans-serif;
-      background-color: #000 !important;
+      background-color: #000;
       color: #fff;
       overflow-x: hidden;
     }
 
     .background-glow {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background:
-        radial-gradient(circle at 50% 30%, rgba(255, 0, 0, 0.04), transparent 80%),
-        linear-gradient(to bottom, rgba(255, 0, 0, 0.02), transparent);
+        radial-gradient(circle at 50% 30%, rgba(255, 0, 0, 0.06), transparent 80%),
+        linear-gradient(to bottom, rgba(255, 0, 0, 0.03), transparent);
       z-index: -1;
       animation: pulseGlow 6s ease-in-out infinite;
     }
@@ -43,18 +39,13 @@
     .logo {
       width: 72px;
       filter: drop-shadow(0 0 15px red);
-      transition: transform 0.3s ease;
-    }
-
-    .logo:hover {
-      transform: scale(1.1);
     }
 
     .site-title {
-      font-size: 2.8rem;
-      font-weight: 700;
+      font-size: 2.5rem;
+      font-weight: bold;
       color: #ff3b3b;
-      text-shadow: 0 0 15px red;
+      text-shadow: 0 0 12px red;
     }
 
     .site-title span {
@@ -63,7 +54,6 @@
 
     .subtitle {
       color: #ccc;
-      font-size: 1rem;
       margin-top: 10px;
     }
 
@@ -182,16 +172,30 @@
       box-shadow: 0 0 20px rgba(255, 75, 100, 1);
     }
 
-    textarea {
-      width: 90%;
-      height: 200px;
-      background: #111;
-      color: #fff;
-      border: 1px solid red;
-      border-radius: 8px;
-      padding: 12px;
-      font-family: monospace;
-      resize: vertical;
+    .download-btn {
+      background: linear-gradient(to right, #ff3b3b, #ff1a1a);
+      color: white;
+      font-weight: bold;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+      transition: transform 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .download-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px red;
+    }
+
+    .version {
+      margin-top: 20px;
+      color: #888;
+      font-size: 0.9rem;
     }
 
     .footer {
@@ -227,19 +231,20 @@
     <button class="tab-btn" onclick="openTab('obfuscator', event)">Luau Obfuscator</button>
   </div>
 
+  <!-- Scripts Tab -->
   <section class="tab-content" id="tab-scripts">
     <div class="script-grid">
       <div class="script-card" onclick="showScript('AutoFarm', 'Coming Soon!')">
         <h2>AutoFarm</h2>
         <p>Automate your grind</p>
       </div>
-      <div class="script-card" onclick="showScript('Server Bowser', 'https://raw.githubusercontent.com/Syr0nix/RedFoxServerBowser/refs/heads/main/Mainlua')">
-        <h2>Server Bowser</h2>
-        <p>See all Servers and join, RedFox style</p>
+      <div class="script-card" onclick="showScript('Server Browser', 'https://raw.githubusercontent.com/Syr0nix/RedFoxServerBowser/refs/heads/main/Mainlua')">
+        <h2>Server Browser</h2>
+        <p>See all servers and join instantly</p>
       </div>
       <div class="script-card" onclick="showScript('Fly', 'Coming Soon!')">
         <h2>Fly</h2>
-        <p>Lift off and stay airborne</p>
+        <p>Soar through the skies</p>
       </div>
     </div>
     <div class="viewer hidden" id="viewer">
@@ -251,20 +256,22 @@
     </div>
   </section>
 
+  <!-- Executor Tab (Download Page) -->
   <section class="tab-content hidden" id="tab-executor">
-    <h2>Executor</h2>
-    <p style="color: #aaa;">Paste and run your custom script here:</p>
-    <textarea placeholder="Enter your script here..."></textarea><br><br>
-    <button style="padding: 10px 20px; background: red; color: white; border: none; border-radius: 8px;">Execute</button>
+    <h2>Download RedFox Executor</h2>
+    <p>The fastest, safest way to run Roblox scripts — built for power users.</p>
+    <a class="download-btn" href="https://yourdomain.com/RedFoxExecutor.zip" download>⬇️ Download Executor</a>
+    <div class="version">v2.0 • 5.4MB • Updated May 2025</div>
   </section>
 
+  <!-- Obfuscator Tab -->
   <section class="tab-content hidden" id="tab-obfuscator">
     <h2>Luau Obfuscator</h2>
-    <p style="color: #aaa;">Coming Soon</p>
+    <p style="color: #aaa;">Coming soon — protect your scripts with advanced obfuscation.</p>
   </section>
 
   <footer class="footer">
-    <p>RedFox Scripts • <a href="https://discord.gg/YOURINVITE">Join Discord</a></p>
+    <p>RedFox Tools • <a href="https://discord.gg/YOURINVITE">Join Discord</a></p>
     <p>© 2025 Syr0nix Studio's™. All rights reserved.</p>
   </footer>
 
